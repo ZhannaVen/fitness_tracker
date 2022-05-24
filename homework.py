@@ -62,25 +62,23 @@ class Training:
 class Running(Training):
 
     """Тренировка: бег."""
-    COEFF_CALORIE_RUN1: int = 18
-    COEFF_CALORIE_RUN2: int = 20
+    COEFF_RUN1: int = 18
+    COEFF_RUN2: int = 20
 
     def get_spent_calories(self) -> float:
         """Получить количество затраченных калорий."""
-        return ((self.COEFF_CALORIE_RUN1
-                 * self.get_mean_speed()
-                 - self.COEFF_CALORIE_RUN2)
-                 * self.weight
-                 / self.M_IN_KM
-                 * self.duration
-                 * Training.MINS_PER_HOUR)
+        return ((self.COEFF_RUN1 * self.get_mean_speed() - self.COEFF_RUN2)
+                * self.weight
+                / self.M_IN_KM
+                * self.duration
+                * Training.MINS_PER_HOUR)
 
 
 class SportsWalking(Training):
     """Тренировка: спортивная ходьба."""
 
-    COEFF_CALORIE_WLK1: int = 0.035
-    COEFF_CALORIE_WLK2: int = 0.029
+    COEFF_WLK1: int = 0.035
+    COEFF_WLK2: int = 0.029
 
     def __init__(self,
                  action: int,
@@ -93,10 +91,10 @@ class SportsWalking(Training):
 
     def get_spent_calories(self) -> float:
         """Получить количество затраченных калорий."""
-        return ((self.COEFF_CALORIE_WLK1
+        return ((self.COEFF_WLK1
                 * self.weight
                 + (self.get_mean_speed() ** 2 // self.height)
-                * self.COEFF_CALORIE_WLK2
+                * self.COEFF_WLK2
                 * self.weight)
                 * self.duration
                 * Training.MINS_PER_HOUR)
@@ -105,8 +103,8 @@ class SportsWalking(Training):
 class Swimming(Training):
     """Тренировка: плавание."""
     LEN_STEP: float = 1.38
-    COEFF_CALORIE_SWM1: float = 1.1
-    COEFF_CALORIE_SWM2: float = 2
+    COEFF_SWM1: float = 1.1
+    COEFF_SWM2: float = 2
 
     def __init__(self,
                  action: int,
@@ -132,8 +130,8 @@ class Swimming(Training):
 
     def get_spent_calories(self) -> float:
         return ((self.get_mean_speed()
-                + self.COEFF_CALORIE_SWM1)
-                * self.COEFF_CALORIE_SWM2
+                + self.COEFF_SWM1)
+                * self.COEFF_SWM2
                 * self.weight)
 
 
