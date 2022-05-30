@@ -1,6 +1,6 @@
 
 from dataclasses import dataclass, asdict
-from typing import Dict
+from typing import Dict, Type
 
 
 @dataclass
@@ -84,7 +84,7 @@ class Running(Training):
             * self.weight
             / self.M_IN_KM
             * self.duration
-            * Training.MINS_PER_HOUR
+            * self.MINS_PER_HOUR
         )
 
 
@@ -118,7 +118,7 @@ class SportsWalking(Training):
                 * self.weight
             )
             * self.duration
-            * Training.MINS_PER_HOUR
+            * self.MINS_PER_HOUR
         )
 
 
@@ -143,15 +143,15 @@ class Swimming(Training):
     def get_distance(self) -> float:
         return (
             self.action
-            * Swimming.LEN_STEP
-            / Training.M_IN_KM
+            * self.LEN_STEP
+            / self.M_IN_KM
         )
 
     def get_mean_speed(self) -> float:
         return (
             self.lenght_pool
             * self.count_pool
-            / Training.M_IN_KM
+            / self.M_IN_KM
             / self.duration
         )
 
@@ -168,15 +168,17 @@ class Swimming(Training):
 
 def read_package(workout_type: str, data: list) -> Training:
     """Прочитать данные полученные от датчиков."""
-    workout_types_dict: Dict[str, str] = {
+
+    workout_types_dict: Dict[str, Type[Training]] = {
         'SWM': Swimming,
         'RUN': Running,
         'WLK': SportsWalking
     }
+    appropriate_trainings = ' '.join(workout_types_dict)
     if workout_type not in workout_types_dict:
         raise ValueError(
             'Неизвестный тип тренировки. Допустимо: '
-            'Swimming, Running, SportsWalking'
+            f'{appropriate_trainings}'
         )
     return workout_types_dict[workout_type](*data)
 
