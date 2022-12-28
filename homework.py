@@ -5,7 +5,7 @@ from typing import Dict, Type
 
 @dataclass
 class InfoMessage:
-    """Информационное сообщение о тренировке."""
+    """Message about the workout."""
 
     training_type: str
     duration: float
@@ -13,11 +13,11 @@ class InfoMessage:
     speed: float
     calories: float
     MESSAGE: str = (
-        'Тип тренировки: {training_type}; '
-        'Длительность: {duration:.3f} ч.; '
-        'Дистанция: {distance:.3f} км; '
-        'Ср. скорость: {speed:.3f} км/ч; '
-        'Потрачено ккал: {calories:.3f}.'
+        'Workout type:: {training_type}; '
+        'Duration: {duration:.3f} hours; '
+        'Distance: {distance:.3f} km; '
+        'Average speed: {speed:.3f} km/hour; '
+        'Calories burned: {calories:.3f}.'
     )
 
     def get_message(self) -> str:
@@ -25,7 +25,7 @@ class InfoMessage:
 
 
 class Training:
-    """Базовый класс тренировки."""
+    """Base class of training."""
     LEN_STEP: float = 0.65
     M_IN_KM: int = 1000
     MINS_PER_HOUR: int = 60
@@ -41,7 +41,7 @@ class Training:
         self.weight = weight
 
     def get_distance(self) -> float:
-        """Получить дистанцию в км."""
+        """Get the distance in kilometers."""
         return (
             self.action
             * self.LEN_STEP
@@ -49,15 +49,15 @@ class Training:
         )
 
     def get_mean_speed(self) -> float:
-        """Получить среднюю скорость движения."""
+        """Get the average speed."""
         return self.get_distance() / self.duration
 
     def get_spent_calories(self) -> float:
-        """Получить количество затраченных калорий."""
+        """Get the number of calories burned."""
         pass
 
     def show_training_info(self) -> InfoMessage:
-        """Вернуть информационное сообщение о выполненной тренировке."""
+        """Return an informational message about the completed workout."""
         return InfoMessage(
             type(self).__name__,
             self.duration,
@@ -69,7 +69,7 @@ class Training:
 
 class Running(Training):
 
-    """Тренировка: бег."""
+    """Workout: running."""
     COEFF_RUN1: int = 18
     COEFF_RUN2: int = 20
 
