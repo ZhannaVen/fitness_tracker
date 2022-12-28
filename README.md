@@ -7,6 +7,7 @@ This module performs the following functions:
 - determines the type of training,
 - calculates the results of training,
 - displays a message about the results of the training.
+
 The message includes the following information:
 - type of training (running, walking or swimming);
 - duration of training;
