@@ -74,7 +74,7 @@ class Running(Training):
     COEFF_RUN2: int = 20
 
     def get_spent_calories(self) -> float:
-        """Получить количество затраченных калорий."""
+        """The functions gets the number of calories burned."""
         return (
             (
                 self.COEFF_RUN1
@@ -89,7 +89,7 @@ class Running(Training):
 
 
 class SportsWalking(Training):
-    """Тренировка: спортивная ходьба."""
+    """Training: walking."""
 
     COEFF_WLK1: int = 0.035
     COEFF_WLK2: int = 0.029
@@ -105,7 +105,6 @@ class SportsWalking(Training):
         self.height = height
 
     def get_spent_calories(self) -> float:
-        """Получить количество затраченных калорий."""
         return (
             (
                 self.COEFF_WLK1
@@ -123,7 +122,7 @@ class SportsWalking(Training):
 
 
 class Swimming(Training):
-    """Тренировка: плавание."""
+    """Training: swimming."""
     LEN_STEP: float = 1.38
     COEFF_SWM1: float = 1.1
     COEFF_SWM2: float = 2
@@ -167,7 +166,7 @@ class Swimming(Training):
 
 
 def read_package(workout_type: str, data: list) -> Training:
-    """Прочитать данные полученные от датчиков."""
+    """The function reads the data received from the sensors."""
 
     workout_types_dict: Dict[str, Type[Training]] = {
         'SWM': Swimming,
@@ -177,14 +176,14 @@ def read_package(workout_type: str, data: list) -> Training:
     appropriate_trainings = ' '.join(workout_types_dict)
     if workout_type not in workout_types_dict:
         raise ValueError(
-            'Неизвестный тип тренировки. Допустимо: '
+            'Unknown workout type. Allowed: '
             f'{appropriate_trainings}'
         )
     return workout_types_dict[workout_type](*data)
 
 
 def main(training: Training) -> None:
-    """Главная функция."""
+    """The main function."""
     info = training.show_training_info()
     print(info.get_message())
 
