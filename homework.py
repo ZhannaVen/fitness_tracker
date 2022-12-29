@@ -5,7 +5,7 @@ from typing import Dict, Type
 
 @dataclass
 class InfoMessage:
-    """Message about the workout."""
+    """The message about the workout."""
 
     training_type: str
     duration: float
@@ -41,7 +41,7 @@ class Training:
         self.weight = weight
 
     def get_distance(self) -> float:
-        """Get the distance in kilometers."""
+        """The function gets the distance in kilometers."""
         return (
             self.action
             * self.LEN_STEP
@@ -49,15 +49,15 @@ class Training:
         )
 
     def get_mean_speed(self) -> float:
-        """Get the average speed."""
+        """The function gets the average speed."""
         return self.get_distance() / self.duration
 
     def get_spent_calories(self) -> float:
-        """Get the number of calories burned."""
+        """The functions gets the number of calories burned."""
         pass
 
     def show_training_info(self) -> InfoMessage:
-        """Return an informational message about the completed workout."""
+        """The functions returns a message about the completed workout."""
         return InfoMessage(
             type(self).__name__,
             self.duration,
@@ -68,7 +68,6 @@ class Training:
 
 
 class Running(Training):
-
     """Workout: running."""
     COEFF_RUN1: int = 18
     COEFF_RUN2: int = 20
@@ -89,7 +88,7 @@ class Running(Training):
 
 
 class SportsWalking(Training):
-    """Training: walking."""
+    """Training: sportswalking."""
 
     COEFF_WLK1: int = 0.035
     COEFF_WLK2: int = 0.029
